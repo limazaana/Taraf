@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سفريات ترف | Taraf Travels</title>
+    
+    <!-- Google Fonts: Cairo for a modern Arabic look -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- المتغيرات اللونية --- */
+        :root {
+            --primary-blue: #0056b3;     /* أزرق عميق */
+            --light-blue: #e3f2fd;       /* أزرق فاتح للخلفيات */
+            --accent-orange: #ff9800;    /* برتقالي حيوي */
+            --deep-orange: #e65100;      /* برتقالي غامق للتحويم */
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+        }
+
+        /* --- التنسيقات العامة --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- الرأس (Header) --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-orange);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: var(--white);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebc57;
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* --- القسم الرئيسي (Hero) --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0, 86, 179, 0.7), rgba(0, 86, 179, 0.4)), 
+                        url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+            position: relative;
+            margin-top: 70px; /* لتعويض الهيدر الثابت */
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--deep-orange);
+            transform: scale(1.05);
+        }
+
+        /* شكل متموج أسفل الهيرو */
+        .custom-shape-divider-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            transform: rotate(180deg);
+        }
+
+        .custom-shape-divider-bottom svg {
+            position: relative;
+            display: block;
+            width: calc(100% + 1.3px);
+            height: 100px;
+        }
+
+        .custom-shape-divider-bottom .shape-fill {
+            fill: var(--bg-light);
+        }
+
+        /* --- المميزات (Services) --- */
+        .features {
+            padding: 5rem 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-orange);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid var(--primary-blue);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 86, 179, 0.15);
+            border-top-color: var(--accent-orange);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            color: var(--accent-orange);
+        }
+
+        /* --- الوجهات (Interactive Destinations) --- */
+        .destinations {
+            background-color: var(--light-blue);
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .filters-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .destination-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: 0.4s;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            position: relative;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-price {
+            color: var(--accent-orange);
+            font-weight: 900;
+        }
+
+        .card-details {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-features {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .btn-card {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        .btn-card:hover {
+            background: var(--text-dark);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #1a252f;
+            color: var(--white);
+            padding: 4rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-orange);
+        }
+
+        .footer-col p, .footer-col a {
+            color: #bdc3c7;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: var(--white);
+        }
+
+        .social-icons a:hover {
+            background: var(--accent-orange);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #7f8c8d;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* --- العروض الخاصة (Special Offers) --- */
+        .offers-section {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+            text-align: center;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+        }
+
+        .offer-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            height: 300px;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.02);
+        }
+
+        .offer-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .offer-card:hover .offer-img {
+            transform: scale(1.1);
+        }
+
+        .offer-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent);
+            color: var(--white);
+            padding: 20px;
+            text-align: right;
+            z-index: 1;
+        }
+
+        .discount-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #e74c3c; /* لون أحمر للفت الانتباه */
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            font-weight: 900;
+            font-size: 1.1rem;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-15deg);
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            line-height: 1;
+        }
+
+        .offer-btn-link {
+            color: var(--accent-orange);
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .offer-btn-link:hover {
+            background: var(--accent-orange);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-plane-departure"></i>
+                سفريات <span>ترف</span>
+            </a>
+            
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">الرئيسية</a></li>
+                <li><a href="#features">خدماتنا</a></li>
+                <li><a href="#destinations">الوجهات</a></li>
+                <li><a href="#offers">عروضنا</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+
+            <!-- ضع رقم الواتساب الخاص بك هنا بدل الرقم الموجود -->
+            <a href="https://wa.me/966500000000" target="_blank" class="btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> تواصل معنا
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>اكتشف العالم مع سفريات ترف</h1>
+            <p>نصنع لك ذكريات لا تُنسى في أجمل وجهات العالم، بأفضل الأسعار وأرقى الخدمات.</p>
+            <button class="btn-primary" onclick="document.getElementById('destinations').scrollIntoView({behavior: 'smooth'})">احجز رحلتك الآن</button>
+        </div>
+
+        <!-- SVG Shape Divider -->
+        <div class="custom-shape-divider-bottom">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">لماذا ترف؟</h2>
+        <p>خدمات متكاملة لرحلة خالية من المتاعب</p>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-ticket-alt feature-icon"></i>
+                <h3>حجوزات طيران</h3>
+                <p>نوفر لك أفضل أسعار التذاكر على كافة خطوط الطيران العالمية مع خيارات مرنة.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-hotel feature-icon"></i>
+                <h3>فنادق فاخرة</h3>
+                <p>تعاقدات مع أرقى الفنادق والمنتجعات حول العالم لتضمن لك إقامة مريحة.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-passport feature-icon"></i>
+                <h3>تأشيرات سياحية</h3>
+                <p>ننهي إجراءات التأشيرات لمختلف الدول بسرعة واحترافية عالية.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-car feature-icon"></i>
+                <h3>استقبال وتوديع</h3>
+                <p>سيارات خاصة وسائقين محترفين في انتظارك في المطار والوجهات السياحية.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Filter Section -->
+    <section class="destinations" id="destinations">
+        <div style="text-align: center;">
+            <h2 class="section-title">وجهاتنا المميزة</h2>
+            <p>اختر وجهتك القادمة من بين باقاتنا المختارة بعناية</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filters-container">
+            <button class="filter-btn active" onclick="filterDestinations('all')">الكل</button>
+            <button class="filter-btn" onclick="filterDestinations('europe')">أوروبا</button>
+            <button class="filter-btn" onclick="filterDestinations('asia')">آسيا</button>
+            <button class="filter-btn" onclick="filterDestinations('arab')">دول عربية</button>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="destinations-grid" id="destGrid">
+            
+            <!-- Europe 1 -->
+            <div class="destination-card" data-category="europe">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1499856871940-a09627c6dcf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="سويسرا" style="width:100%; height:100%; object-fit:cover;">
+                    <span class="card-badge">عرض خاص</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        سويسرا الساحرة
+                        <span class="card-price">6500 ر.س</span>
+                    </div>
+                    <div class="card-features">
+                        <span><i class="fas fa-clock"></i> 7 أيام</span>
+                        <span><i class="fas fa-user"></i> شخصين</span>
+                    </div>
+                    <p class="card-details">شامل الطيران والفنادق والجولات السياحية في إنترلاكن وزيورخ.</p>
+                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة سويسرا" target="_blank" class="btn-card">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- Asia 1 -->
+            <div class="destination-card" data-category="asia">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تايلاند" style="width:100%; height:100%; object-fit:cover;">
+                    <span class="card-badge">الأكثر طلباً</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        جزر تايلاند
+                        <span class="card-price">4200 ر.س</span>
+                    </div>
+                    <div class="card-features">
+                        <span><i class="fas fa-clock"></i> 10 أيام</span>
+                        <span><i class="fas fa-user"></i> شخصين</span>
+                    </div>
+                    <p class="card-details">استمتع بجمال بوكيت وكرابي مع رحلات بحرية خلابة.</p>
+                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة تايلاند" target="_blank" class="btn-card">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- Europe 2 -->
+            <div class="destination-card" data-category="europe">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="إيطاليا" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        فينيسيا - إيطاليا
+                        <span class="card-price">5800 ر.س</span>
+                    </div>
+                    <div class="card-features">
+                        <span><i class="fas fa-clock"></i> 6 أيام</span>
+                        <span><i class="fas fa-user"></i> شخصين</span>
+                    </div>
+                    <p class="card-details">جولة رومانسية في القنوات المائية وزيارة المعالم التاريخية.</p>
+                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة إيطاليا" target="_blank" class="btn-card">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- Arab 1 -->
+            <div class="destination-card" data-category="arab">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea904ac66de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="دبي" style="width:100%; height:100%; object-fit:cover;">
+                    <span class="card-badge">رحلات الويكند</span>
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        دبي - الإمارات
+                        <span class="card-price">2500 ر.س</span>
+                    </div>
+                    <div class="card-features">
+                        <span><i class="fas fa-clock"></i> 3 أيام</span>
+                        <span><i class="fas fa-user"></i> عائلة</span>
+                    </div>
+                    <p class="card-details">إقامة في فندق 5 نجوم مع تذاكر دخول دبي باركس.</p>
+                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة دبي" target="_blank" class="btn-card">احجز الآن</a>
+                </div>
+            </div>
+
+             <!-- Asia 2 -->
+             <div class="destination-card" data-category="asia">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="بالي" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        بالي - إندونيسيا
+                        <span class="card-price">3900 ر.س</span>
+                    </div>
+                    <div class="card-features">
+                        <span><i class="fas fa-clock"></i> 8 أيام</span>
+                        <span><i class="fas fa-user"></i> شخصين</span>
+                    </div>
+                    <p class="card-details">فلل خاصة مع مسبح وجولات في الطبيعة الخلابة.</p>
+                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة بالي" target="_blank" class="btn-card">احجز الآن</a>
+                </div>
+            </div>
+
+            <!-- Arab 2 -->
+            <div class="destination-card" data-category="arab">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="مصر" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="card-content">
+                    <div class="card-title">
+                        شرم الشيخ - مصر
+                        <span class="card-price">1800 ر.س</span>
+                    </div>
+                    <div class="card-features">
+                        <span><i class="fas fa-clock"></i> 5 أيام</span>
+                        <span><i class="fas fa-user"></i> شامل</span>
+                    </div>
+                    <p class="card-details">استجمام على البحر الأحمر شامل الوجبات والمشروبات.</p>
+                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة شرم الشيخ" target="_blank" class="btn-card">احجز الآن</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section class="offers-section" id="offers">
+        <h2 class="section-title">عروض الموسم الحصرية</h2>
+        <p>باقات مختارة بعناية بأسعار لا تقبل المنافسة لفترة محدودة</p>
+
+        <div class="offers-grid">
+            <!-- Offer 1 -->
+            <div class="offer-card">
+                <div class="discount-badge">
+                    <span>20%</span>
+                    <span style="font-size:0.7rem">خصم</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1514282401047-d77a7149ba6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="المالديف" class="offer-img">
+                <div class="offer-overlay">
+                    <h3>شهر العسل في المالديف</h3>
+                    <p>شامل الطيران الدولي والإقامة في فيلا فوق الماء</p>
+                    <a href="https://wa.me/966500000000?text=استفسار عن عرض المالديف" class="offer-btn-link">تفاصيل العرض <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+            
+            <!-- Offer 2 -->
+             <div class="offer-card">
+                <div class="discount-badge">
+                    <span>15%</span>
+                    <span style="font-size:0.7rem">خصم</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تركيا" class="offer-img">
+                <div class="offer-overlay">
+                    <h3>اسطنبول وكبادوكيا</h3>
+                    <p>رحلة عائلية لمدة 8 أيام شاملة الجولات والمواصلات</p>
+                    <a href="https://wa.me/966500000000?text=استفسار عن عرض تركيا" class="offer-btn-link">تفاصيل العرض <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <!-- Offer 3 -->
+             <div class="offer-card">
+                <div class="discount-badge">
+                    <span>10%</span>
+                    <span style="font-size:0.7rem">خصم</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="لندن" class="offer-img">
+                <div class="offer-overlay">
+                    <h3>صيف لندن</h3>
+                    <p>بكج سياحي لزيارة المعالم الشهيرة والتسوق في أكسفورد</p>
+                    <a href="https://wa.me/966500000000?text=استفسار عن عرض لندن" class="offer-btn-link">تفاصيل العرض <i class="fas fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom: 1rem; display:inline-block;">
+                    <i class="fas fa-plane-departure" style="color:var(--accent-orange)"></i>
+                    <span style="color:#fff">سفريات</span> <span style="color:var(--accent-orange)">ترف</span>
+                </a>
+                <p>وجهتك الأولى للسفر والسياحة. نقدم أفضل العروض السياحية حول العالم بخبرة تمتد لسنوات.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <a href="#home">الرئيسية</a>
+                <a href="#features">من نحن</a>
+                <a href="#destinations">العروض السياحية</a>
+                <a href="#contact">سياسة الخصوصية</a>
+            </div>
+
+            <div class="footer-col">
+                <h3>تواصل معنا</h3>
+                <p><i class="fas fa-map-marker-alt" style="margin-left:10px; color:var(--accent-orange)"></i> الرياض، المملكة العربية السعودية</p>
+                <p><i class="fas fa-phone" style="margin-left:10px; color:var(--accent-orange)"></i> +966 50 000 0000</p>
+                <p><i class="fas fa-envelope" style="margin-left:10px; color:var(--accent-orange)"></i> info@taraftravels.com</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>جميع الحقوق محفوظة © سفريات ترف 2024</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // 1. Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // 2. Destinations Filtering
+        function filterDestinations(category) {
+            const cards = document.querySelectorAll('.destination-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update active button styling
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.innerText === event.target.innerText) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Show/Hide cards with animation
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }, 300);
+            });
+        }
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
