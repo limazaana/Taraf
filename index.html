@@ -5,171 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سفريات ترف | Taraf Travels</title>
     
-    <!-- Google Fonts: Cairo for a modern Arabic look -->
+    <!-- Google Fonts: Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0056b3',
+                        accent: '#ff9800',
+                        deepOrange: '#e65100',
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* --- المتغيرات اللونية --- */
-        :root {
-            --primary-blue: #0056b3;     /* أزرق عميق */
-            --light-blue: #e3f2fd;       /* أزرق فاتح للخلفيات */
-            --accent-orange: #ff9800;    /* برتقالي حيوي */
-            --deep-orange: #e65100;      /* برتقالي غامق للتحويم */
-            --white: #ffffff;
-            --text-dark: #2c3e50;
-            --text-light: #666;
-            --bg-light: #f8f9fa;
-        }
-
-        /* --- التنسيقات العامة --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        a {
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* --- الرأس (Header) --- */
-        header {
-            background-color: var(--white);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--primary-blue);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--accent-orange);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-orange);
-        }
-
-        .btn-whatsapp {
-            background-color: #25D366;
-            color: var(--white);
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #1ebc57;
-            transform: translateY(-2px);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            color: var(--primary-blue);
-            cursor: pointer;
-        }
-
-        /* --- القسم الرئيسي (Hero) --- */
-        .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(0, 86, 179, 0.7), rgba(0, 86, 179, 0.4)), 
-                        url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding: 0 20px;
-            position: relative;
-            margin-top: 70px; /* لتعويض الهيدر الثابت */
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 900;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-orange);
-            color: var(--white);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--deep-orange);
-            transform: scale(1.05);
-        }
-
-        /* شكل متموج أسفل الهيرو */
+        /* Hero Shape Divider */
         .custom-shape-divider-bottom {
             position: absolute;
             bottom: 0;
@@ -188,716 +56,699 @@
         }
 
         .custom-shape-divider-bottom .shape-fill {
-            fill: var(--bg-light);
+            fill: #f8f9fa;
         }
 
-        /* --- المميزات (Services) --- */
-        .features {
-            padding: 5rem 2rem;
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Navigation active state */
+        .nav-link.active {
+            color: #ff9800;
+            border-bottom: 2px solid #ff9800;
         }
 
-        .section-title {
-            color: var(--primary-blue);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            width: 60px;
-            height: 4px;
-            background-color: var(--accent-orange);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: 0.4s;
-            position: relative;
-            overflow: hidden;
-            border-top: 4px solid var(--primary-blue);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 86, 179, 0.15);
-            border-top-color: var(--accent-orange);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            transition: 0.3s;
-        }
-
-        .feature-card:hover .feature-icon {
-            color: var(--accent-orange);
-        }
-
-        /* --- الوجهات (Interactive Destinations) --- */
-        .destinations {
-            background-color: var(--light-blue);
-            padding: 5rem 2rem;
-            position: relative;
-        }
-
-        .filters-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
-            padding: 0.6rem 1.5rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            transition: 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-blue);
-            color: var(--white);
-        }
-
-        .destinations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .destination-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: 0.4s;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
+        /* Animations */
+        @keyframes slideUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .destination-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        .animate-slideUp {
+            animation: slideUp 0.3s ease-out forwards;
         }
 
-        .card-img {
-            height: 200px;
-            width: 100%;
-            object-fit: cover;
-            position: relative;
+        @keyframes fadeInDown {
+          from { opacity: 0; transform: translateY(-30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeInDown {
+            animation: fadeInDown 1s ease-out forwards;
         }
 
-        .card-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--accent-orange);
-            color: var(--white);
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.9rem;
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .card-content {
-            padding: 1.5rem;
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
         }
-
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .card-price {
-            color: var(--accent-orange);
-            font-weight: 900;
-        }
-
-        .card-details {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-features {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .btn-card {
-            display: block;
-            width: 100%;
-            text-align: center;
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 0.8rem;
+        ::-webkit-scrollbar-thumb {
+            background: #0056b3;
             border-radius: 10px;
-            font-weight: 700;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #003d7a;
         }
 
-        .btn-card:hover {
-            background: var(--text-dark);
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: #1a252f;
-            color: var(--white);
-            padding: 4rem 2rem 1rem;
-            margin-top: 4rem;
-        }
-
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-col h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--accent-orange);
-        }
-
-        .footer-col p, .footer-col a {
-            color: #bdc3c7;
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: var(--white);
-        }
-
-        .social-icons a:hover {
-            background: var(--accent-orange);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #7f8c8d;
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                right: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 2rem;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        /* --- العروض الخاصة (Special Offers) --- */
-        .offers-section {
-            padding: 5rem 2rem;
-            background-color: var(--white);
-            text-align: center;
-        }
-
-        .offers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 3rem auto 0;
-        }
-
-        .offer-card {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            height: 300px;
-        }
-
-        .offer-card:hover {
-            transform: scale(1.02);
-        }
-
-        .offer-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
-        .offer-card:hover .offer-img {
-            transform: scale(1.1);
-        }
-
-        .offer-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent);
-            color: var(--white);
-            padding: 20px;
-            text-align: right;
-            z-index: 1;
-        }
-
-        .discount-badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: #e74c3c; /* لون أحمر للفت الانتباه */
-            color: white;
-            padding: 10px;
-            border-radius: 50%;
-            font-weight: 900;
-            font-size: 1.1rem;
-            width: 70px;
-            height: 70px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transform: rotate(-15deg);
-            z-index: 2;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            line-height: 1;
-        }
-
-        .offer-btn-link {
-            color: var(--accent-orange);
-            font-weight: bold;
-            margin-top: 10px;
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 15px;
-            border-radius: 20px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .offer-btn-link:hover {
-            background: var(--accent-orange);
-            color: var(--white);
+        /* Utility classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
     </style>
 </head>
-<body>
+<body class="bg-[#f8f9fa] text-slate-800 antialiased overflow-x-hidden">
 
-    <!-- Header -->
-    <header>
-        <nav class="navbar">
-            <a href="#" class="logo">
-                <i class="fas fa-plane-departure"></i>
-                سفريات <span>ترف</span>
+    <!-- Header Section -->
+    <header class="bg-white/95 backdrop-blur-md shadow-lg fixed w-full top-0 z-[1000] h-[85px] flex items-center transition-all duration-300" id="main-header">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 no-underline group">
+                <img src="44.png" alt="" class="w16 h-16">
+                <div class="flex flex-col justify-center">
+                    <div class="text-2xl font-black text-primary leading-none">
+                        سفريات <span class="text-accent">ترف</span>
+                    </div>
+                    <div class="text-[10px] uppercase tracking-widest text-slate-400 font-semibold mt-1">
+                        Taraf Travels
+                    </div>
+                </div>
             </a>
-            
-            <div class="mobile-menu-btn" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center gap-8">
+                <ul class="flex gap-6">
+                    <li><a href="#home" class="nav-link font-bold text-lg text-slate-700 transition-all hover:text-accent border-b-2 border-transparent py-1">الرئيسية</a></li>
+                    <li><a href="#features" class="nav-link font-bold text-lg text-slate-700 transition-all hover:text-accent border-b-2 border-transparent py-1">خدماتنا</a></li>
+                    <li><a href="#destinations" class="nav-link font-bold text-lg text-slate-700 transition-all hover:text-accent border-b-2 border-transparent py-1">الوجهات</a></li>
+                    <li><a href="#offers" class="nav-link font-bold text-lg text-slate-700 transition-all hover:text-accent border-b-2 border-transparent py-1">عروضنا</a></li>
+                    <li><a href="#contact" class="nav-link font-bold text-lg text-slate-700 transition-all hover:text-accent border-b-2 border-transparent py-1">اتصل بنا</a></li>
+                </ul>
+                <a href="https://wa.me/966500000000" target="_blank" class="bg-[#25D366] text-white px-6 py-2.5 rounded-full font-bold flex items-center gap-2 shadow-md hover:bg-[#1ebc57] hover:-translate-y-0.5 transition-all">
+                    <i class="fab fa-whatsapp text-xl"></i> تواصل معنا
+                </a>
             </div>
 
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#home" class="active">الرئيسية</a></li>
-                <li><a href="#features">خدماتنا</a></li>
-                <li><a href="#destinations">الوجهات</a></li>
-                <li><a href="#offers">عروضنا</a></li>
-                <li><a href="#contact">اتصل بنا</a></li>
-            </ul>
-
-            <!-- ضع رقم الواتساب الخاص بك هنا بدل الرقم الموجود -->
-            <a href="https://wa.me/966500000000" target="_blank" class="btn-whatsapp">
-                <i class="fab fa-whatsapp"></i> تواصل معنا
-            </a>
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-primary p-2">
+                <i class="fas fa-bars text-3xl"></i>
+            </button>
         </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden absolute top-[85px] left-0 w-full bg-white shadow-2xl md:hidden border-t animate-slideUp">
+            <ul class="flex flex-col p-6 gap-4">
+                <li><a href="#home" class="mobile-nav-link block text-right font-bold text-xl py-2 text-slate-700 border-b border-slate-50">الرئيسية</a></li>
+                <li><a href="#features" class="mobile-nav-link block text-right font-bold text-xl py-2 text-slate-700 border-b border-slate-50">خدماتنا</a></li>
+                <li><a href="#destinations" class="mobile-nav-link block text-right font-bold text-xl py-2 text-slate-700 border-b border-slate-50">الوجهات</a></li>
+                <li><a href="#offers" class="mobile-nav-link block text-right font-bold text-xl py-2 text-slate-700 border-b border-slate-50">عروضنا</a></li>
+                <li><a href="#contact" class="mobile-nav-link block text-right font-bold text-xl py-2 text-slate-700 border-b border-slate-50">اتصل بنا</a></li>
+                <li class="pt-4">
+                    <a href="https://wa.me/966500000000" target="_blank" class="bg-[#25D366] text-white p-5 rounded-2xl font-black flex items-center justify-center gap-3 text-lg">
+                        <i class="fab fa-whatsapp text-3xl"></i> تواصل عبر واتساب
+                    </a>
+                </li>
+            </ul>
+        </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>اكتشف العالم مع سفريات ترف</h1>
-            <p>نصنع لك ذكريات لا تُنسى في أجمل وجهات العالم، بأفضل الأسعار وأرقى الخدمات.</p>
-            <button class="btn-primary" onclick="document.getElementById('destinations').scrollIntoView({behavior: 'smooth'})">احجز رحلتك الآن</button>
+    <section id="home" class="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-[85px]">
+        <!-- High-quality Optimized Background -->
+        <div class="absolute inset-0 z-0 bg-primary" 
+             style="background-image: linear-gradient(rgba(0, 86, 179, 0.6), rgba(0, 86, 179, 0.3)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=85&w=2560&auto=format&fit=crop'); 
+                    background-size: cover; background-position: center; background-attachment: fixed;">
+        </div>
+        
+        <div class="relative z-10 text-center text-white px-6 max-w-5xl animate-fadeInDown">
+            <h1 class="text-5xl md:text-8xl font-black mb-8 drop-shadow-2xl leading-tight">
+                اكتشف العالم مع <br class="hidden md:block"> سفريات <span class="text-accent underline decoration-accent underline-offset-8">ترف</span>
+            </h1>
+            <p class="text-xl md:text-3xl font-bold mb-12 opacity-95 leading-relaxed drop-shadow-lg max-w-3xl mx-auto">
+                نصنع لك تجارب سياحية فاخرة في أجمل وجهات العالم، بأفضل الأسعار وأرقى معايير الضيافة.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#destinations" class="bg-accent hover:bg-deepOrange text-white px-12 py-5 rounded-full text-2xl font-black shadow-[0_15px_40px_rgba(255,152,0,0.4)] transition-all hover:scale-105 active:scale-95">
+                    احجز وجهتك الآن
+                </a>
+                <a href="#offers" class="bg-white/20 backdrop-blur-md text-white border-2 border-white/50 px-12 py-5 rounded-full text-2xl font-black shadow-xl hover:bg-white hover:text-primary transition-all">
+                    شاهد العروض
+                </a>
+            </div>
         </div>
 
-        <!-- SVG Shape Divider -->
+        <!-- Shape Divider -->
         <div class="custom-shape-divider-bottom">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
                 <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
             </svg>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <h2 class="section-title">لماذا ترف؟</h2>
-        <p>خدمات متكاملة لرحلة خالية من المتاعب</p>
-        
-        <div class="features-grid">
-            <div class="feature-card">
-                <i class="fas fa-ticket-alt feature-icon"></i>
-                <h3>حجوزات طيران</h3>
-                <p>نوفر لك أفضل أسعار التذاكر على كافة خطوط الطيران العالمية مع خيارات مرنة.</p>
+    <!-- Services / Features Section -->
+    <section id="features" class="py-24 px-6 max-w-7xl mx-auto text-center">
+        <div class="mb-20">
+            <h2 class="text-5xl font-black text-primary mb-6 relative inline-block">
+                لماذا تختار ترف؟
+                <span class="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-accent rounded-full"></span>
+            </h2>
+            <p class="text-2xl text-slate-500 mt-10 max-w-2xl mx-auto font-bold">خدمات احترافية متكاملة لضمان راحة بالك طوال فترة الرحلة</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            <!-- Flight -->
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border-t-8 border-primary hover:border-accent hover:-translate-y-3 transition-all duration-500 group">
+                <div class="w-24 h-24 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                    <i class="fas fa-plane-departure text-5xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-slate-800">حجوزات طيران</h3>
+                <p class="text-slate-600 leading-relaxed font-bold">باقات طيران حصرية وأسعار تنافسية على كافة الخطوط العالمية والمحلية.</p>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-hotel feature-icon"></i>
-                <h3>فنادق فاخرة</h3>
-                <p>تعاقدات مع أرقى الفنادق والمنتجعات حول العالم لتضمن لك إقامة مريحة.</p>
+            <!-- Hotels -->
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border-t-8 border-primary hover:border-accent hover:-translate-y-3 transition-all duration-500 group">
+                <div class="w-24 h-24 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                    <i class="fas fa-hotel text-5xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-slate-800">فنادق فاخرة</h3>
+                <p class="text-slate-600 leading-relaxed font-bold">أرقى الفنادق والمنتجعات العالمية المختارة بعناية لضمان إقامة ملكية فاخرة.</p>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-passport feature-icon"></i>
-                <h3>تأشيرات سياحية</h3>
-                <p>ننهي إجراءات التأشيرات لمختلف الدول بسرعة واحترافية عالية.</p>
+            <!-- Visa -->
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border-t-8 border-primary hover:border-accent hover:-translate-y-3 transition-all duration-500 group">
+                <div class="w-24 h-24 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                    <i class="fas fa-passport text-5xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-slate-800">تأشيرات سريعة</h3>
+                <p class="text-slate-600 leading-relaxed font-bold">تسهيل كافة إجراءات التأشيرات السياحية لمختلف دول العالم بكل سرعة واحترافية.</p>
             </div>
-            <div class="feature-card">
-                <i class="fas fa-car feature-icon"></i>
-                <h3>استقبال وتوديع</h3>
-                <p>سيارات خاصة وسائقين محترفين في انتظارك في المطار والوجهات السياحية.</p>
+            <!-- Car -->
+            <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border-t-8 border-primary hover:border-accent hover:-translate-y-3 transition-all duration-500 group">
+                <div class="w-24 h-24 bg-blue-50 text-primary rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                    <i class="fas fa-car-side text-5xl"></i>
+                </div>
+                <h3 class="text-2xl font-black mb-4 text-slate-800">استقبال وتوديع</h3>
+                <p class="text-slate-600 leading-relaxed font-bold">خدمات نقل خاصة بسيارات حديثة وسائقين محترفين من وإلى المطار والوجهات.</p>
             </div>
         </div>
     </section>
 
-    <!-- Destinations Filter Section -->
-    <section class="destinations" id="destinations">
-        <div style="text-align: center;">
-            <h2 class="section-title">وجهاتنا المميزة</h2>
-            <p>اختر وجهتك القادمة من بين باقاتنا المختارة بعناية</p>
-        </div>
-
-        <!-- Filter Buttons -->
-        <div class="filters-container">
-            <button class="filter-btn active" onclick="filterDestinations('all')">الكل</button>
-            <button class="filter-btn" onclick="filterDestinations('europe')">أوروبا</button>
-            <button class="filter-btn" onclick="filterDestinations('asia')">آسيا</button>
-            <button class="filter-btn" onclick="filterDestinations('arab')">دول عربية</button>
-        </div>
-
-        <!-- Cards Grid -->
-        <div class="destinations-grid" id="destGrid">
-            
-            <!-- Europe 1 -->
-            <div class="destination-card" data-category="europe">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1499856871940-a09627c6dcf6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="سويسرا" style="width:100%; height:100%; object-fit:cover;">
-                    <span class="card-badge">عرض خاص</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-title">
-                        سويسرا الساحرة
-                        <span class="card-price">6500 ر.س</span>
-                    </div>
-                    <div class="card-features">
-                        <span><i class="fas fa-clock"></i> 7 أيام</span>
-                        <span><i class="fas fa-user"></i> شخصين</span>
-                    </div>
-                    <p class="card-details">شامل الطيران والفنادق والجولات السياحية في إنترلاكن وزيورخ.</p>
-                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة سويسرا" target="_blank" class="btn-card">احجز الآن</a>
-                </div>
+    <!-- Destinations Section -->
+    <section id="destinations" class="bg-blue-50/50 py-24 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black text-primary mb-6">وجهاتنا المميزة</h2>
+                <p class="text-2xl text-slate-500 font-bold">استكشف باقاتنا المختارة بعناية لتناسب رغباتك وتطلعاتك</p>
             </div>
 
-            <!-- Asia 1 -->
-            <div class="destination-card" data-category="asia">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تايلاند" style="width:100%; height:100%; object-fit:cover;">
-                    <span class="card-badge">الأكثر طلباً</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-title">
-                        جزر تايلاند
-                        <span class="card-price">4200 ر.س</span>
-                    </div>
-                    <div class="card-features">
-                        <span><i class="fas fa-clock"></i> 10 أيام</span>
-                        <span><i class="fas fa-user"></i> شخصين</span>
-                    </div>
-                    <p class="card-details">استمتع بجمال بوكيت وكرابي مع رحلات بحرية خلابة.</p>
-                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة تايلاند" target="_blank" class="btn-card">احجز الآن</a>
-                </div>
+            <!-- Filters -->
+            <div class="flex justify-center gap-4 mb-20 flex-wrap">
+                <button class="filter-btn px-10 py-4 rounded-full font-black transition-all border-2 bg-primary border-primary text-white shadow-xl scale-105" data-filter="all">الكل</button>
+                <button class="filter-btn px-10 py-4 rounded-full font-black transition-all border-2 bg-white border-primary text-primary hover:bg-primary hover:text-white" data-filter="europe">أوروبا</button>
+                <button class="filter-btn px-10 py-4 rounded-full font-black transition-all border-2 bg-white border-primary text-primary hover:bg-primary hover:text-white" data-filter="asia">آسيا</button>
+                <button class="filter-btn px-10 py-4 rounded-full font-black transition-all border-2 bg-white border-primary text-primary hover:bg-primary hover:text-white" data-filter="arab">دول عربية</button>
             </div>
 
-            <!-- Europe 2 -->
-            <div class="destination-card" data-category="europe">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="إيطاليا" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <div class="card-content">
-                    <div class="card-title">
-                        فينيسيا - إيطاليا
-                        <span class="card-price">5800 ر.س</span>
+            <!-- Destinations Grid -->
+            <div id="dest-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Card: Switzerland -->
+                <div class="dest-card bg-white rounded-[3rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group flex flex-col h-full" data-category="europe">
+                    <div class="relative aspect-[16/10] overflow-hidden bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="سويسرا" loading="lazy">
+                        <span class="absolute top-6 right-6 bg-accent text-white px-5 py-2 rounded-2xl font-black text-sm shadow-xl z-10">عرض خاص</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
-                    <div class="card-features">
-                        <span><i class="fas fa-clock"></i> 6 أيام</span>
-                        <span><i class="fas fa-user"></i> شخصين</span>
+                    <div class="p-10 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-3xl font-black text-primary">سويسرا الساحرة</h3>
+                            <div class="text-accent text-2xl font-black">6,500 <span class="text-sm">ر.س</span></div>
+                        </div>
+                        <div class="flex gap-8 mb-8 text-slate-500 font-black text-lg">
+                            <span><i class="fas fa-calendar-alt text-accent ml-2"></i>7 أيام</span>
+                            <span><i class="fas fa-users text-accent ml-2"></i>شخصين</span>
+                        </div>
+                        <p class="text-slate-600 mb-10 leading-relaxed font-bold flex-grow">استمتع بسحر جبال الألب والبحيرات الكريستالية في زيورخ وإنترلاكن ولوزيرن.</p>
+                        <a href="https://wa.me/966500000000" class="w-full bg-primary text-white py-5 rounded-2xl font-black text-center text-xl hover:bg-slate-800 transition-all shadow-lg flex items-center justify-center gap-3">
+                            احجز باقتك <i class="fas fa-chevron-left"></i>
+                        </a>
                     </div>
-                    <p class="card-details">جولة رومانسية في القنوات المائية وزيارة المعالم التاريخية.</p>
-                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة إيطاليا" target="_blank" class="btn-card">احجز الآن</a>
                 </div>
-            </div>
-
-            <!-- Arab 1 -->
-            <div class="destination-card" data-category="arab">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea904ac66de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="دبي" style="width:100%; height:100%; object-fit:cover;">
-                    <span class="card-badge">رحلات الويكند</span>
-                </div>
-                <div class="card-content">
-                    <div class="card-title">
-                        دبي - الإمارات
-                        <span class="card-price">2500 ر.س</span>
+                <!-- Card: Thailand -->
+                <div class="dest-card bg-white rounded-[3rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group flex flex-col h-full" data-category="asia">
+                    <div class="relative aspect-[16/10] overflow-hidden bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1528181304800-2f140819898f?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="تايلاند" loading="lazy">
+                        <span class="absolute top-6 right-6 bg-accent text-white px-5 py-2 rounded-2xl font-black text-sm shadow-xl z-10">الأكثر طلباً</span>
                     </div>
-                    <div class="card-features">
-                        <span><i class="fas fa-clock"></i> 3 أيام</span>
-                        <span><i class="fas fa-user"></i> عائلة</span>
+                    <div class="p-10 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-3xl font-black text-primary">جزر تايلاند</h3>
+                            <div class="text-accent text-2xl font-black">4,200 <span class="text-sm">ر.س</span></div>
+                        </div>
+                        <div class="flex gap-8 mb-8 text-slate-500 font-black text-lg">
+                            <span><i class="fas fa-calendar-alt text-accent ml-2"></i>10 أيام</span>
+                            <span><i class="fas fa-users text-accent ml-2"></i>شخصين</span>
+                        </div>
+                        <p class="text-slate-600 mb-10 leading-relaxed font-bold flex-grow">اكتشف روعة الشواطئ الاستوائية والحياة النابضة في بوكيت وكوه ساموي.</p>
+                        <a href="https://wa.me/966500000000" class="w-full bg-primary text-white py-5 rounded-2xl font-black text-center text-xl hover:bg-slate-800 transition-all shadow-lg flex items-center justify-center gap-3">
+                            احجز باقتك <i class="fas fa-chevron-left"></i>
+                        </a>
                     </div>
-                    <p class="card-details">إقامة في فندق 5 نجوم مع تذاكر دخول دبي باركس.</p>
-                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة دبي" target="_blank" class="btn-card">احجز الآن</a>
                 </div>
-            </div>
-
-             <!-- Asia 2 -->
-             <div class="destination-card" data-category="asia">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="بالي" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <div class="card-content">
-                    <div class="card-title">
-                        بالي - إندونيسيا
-                        <span class="card-price">3900 ر.س</span>
+                <!-- Card: Dubai -->
+                <div class="dest-card bg-white rounded-[3rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 group flex flex-col h-full" data-category="arab">
+                    <div class="relative aspect-[16/10] overflow-hidden bg-slate-200">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea904ac66de?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="دبي" loading="lazy">
+                        <span class="absolute top-6 right-6 bg-accent text-white px-5 py-2 rounded-2xl font-black text-sm shadow-xl z-10">رحلة عائلية</span>
                     </div>
-                    <div class="card-features">
-                        <span><i class="fas fa-clock"></i> 8 أيام</span>
-                        <span><i class="fas fa-user"></i> شخصين</span>
+                    <div class="p-10 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-3xl font-black text-primary">دبي - الإمارات</h3>
+                            <div class="text-accent text-2xl font-black">2,500 <span class="text-sm">ر.س</span></div>
+                        </div>
+                        <div class="flex gap-8 mb-8 text-slate-500 font-black text-lg">
+                            <span><i class="fas fa-calendar-alt text-accent ml-2"></i>4 أيام</span>
+                            <span><i class="fas fa-users text-accent ml-2"></i>عائلة</span>
+                        </div>
+                        <p class="text-slate-600 mb-10 leading-relaxed font-bold flex-grow">عش تجربة التسوق والترفيه في أكبر المدن العصرية مع إقامة في فنادق عالمية.</p>
+                        <a href="https://wa.me/966500000000" class="w-full bg-primary text-white py-5 rounded-2xl font-black text-center text-xl hover:bg-slate-800 transition-all shadow-lg flex items-center justify-center gap-3">
+                            احجز باقتك <i class="fas fa-chevron-left"></i>
+                        </a>
                     </div>
-                    <p class="card-details">فلل خاصة مع مسبح وجولات في الطبيعة الخلابة.</p>
-                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة بالي" target="_blank" class="btn-card">احجز الآن</a>
-                </div>
-            </div>
-
-            <!-- Arab 2 -->
-            <div class="destination-card" data-category="arab">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="مصر" style="width:100%; height:100%; object-fit:cover;">
-                </div>
-                <div class="card-content">
-                    <div class="card-title">
-                        شرم الشيخ - مصر
-                        <span class="card-price">1800 ر.س</span>
-                    </div>
-                    <div class="card-features">
-                        <span><i class="fas fa-clock"></i> 5 أيام</span>
-                        <span><i class="fas fa-user"></i> شامل</span>
-                    </div>
-                    <p class="card-details">استجمام على البحر الأحمر شامل الوجبات والمشروبات.</p>
-                    <a href="https://wa.me/966500000000?text=أريد الاستفسار عن رحلة شرم الشيخ" target="_blank" class="btn-card">احجز الآن</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Special Offers Section -->
-    <section class="offers-section" id="offers">
-        <h2 class="section-title">عروض الموسم الحصرية</h2>
-        <p>باقات مختارة بعناية بأسعار لا تقبل المنافسة لفترة محدودة</p>
-
-        <div class="offers-grid">
-            <!-- Offer 1 -->
-            <div class="offer-card">
-                <div class="discount-badge">
-                    <span>20%</span>
-                    <span style="font-size:0.7rem">خصم</span>
-                </div>
-                <img src="https://images.unsplash.com/photo-1514282401047-d77a7149ba6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="المالديف" class="offer-img">
-                <div class="offer-overlay">
-                    <h3>شهر العسل في المالديف</h3>
-                    <p>شامل الطيران الدولي والإقامة في فيلا فوق الماء</p>
-                    <a href="https://wa.me/966500000000?text=استفسار عن عرض المالديف" class="offer-btn-link">تفاصيل العرض <i class="fas fa-arrow-left"></i></a>
-                </div>
-            </div>
-            
-            <!-- Offer 2 -->
-             <div class="offer-card">
-                <div class="discount-badge">
-                    <span>15%</span>
-                    <span style="font-size:0.7rem">خصم</span>
-                </div>
-                <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="تركيا" class="offer-img">
-                <div class="offer-overlay">
-                    <h3>اسطنبول وكبادوكيا</h3>
-                    <p>رحلة عائلية لمدة 8 أيام شاملة الجولات والمواصلات</p>
-                    <a href="https://wa.me/966500000000?text=استفسار عن عرض تركيا" class="offer-btn-link">تفاصيل العرض <i class="fas fa-arrow-left"></i></a>
-                </div>
-            </div>
-
-            <!-- Offer 3 -->
-             <div class="offer-card">
-                <div class="discount-badge">
-                    <span>10%</span>
-                    <span style="font-size:0.7rem">خصم</span>
-                </div>
-                <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="لندن" class="offer-img">
-                <div class="offer-overlay">
-                    <h3>صيف لندن</h3>
-                    <p>بكج سياحي لزيارة المعالم الشهيرة والتسوق في أكسفورد</p>
-                    <a href="https://wa.me/966500000000?text=استفسار عن عرض لندن" class="offer-btn-link">تفاصيل العرض <i class="fas fa-arrow-left"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo" style="margin-bottom: 1rem; display:inline-block;">
-                    <i class="fas fa-plane-departure" style="color:var(--accent-orange)"></i>
-                    <span style="color:#fff">سفريات</span> <span style="color:var(--accent-orange)">ترف</span>
-                </a>
-                <p>وجهتك الأولى للسفر والسياحة. نقدم أفضل العروض السياحية حول العالم بخبرة تمتد لسنوات.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-snapchat-ghost"></i></a>
+    <!-- Special Offers Section -->
+    <section id="offers" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20">
+                <h2 class="text-5xl font-black text-primary mb-6">عروضنا الحصرية</h2>
+                <p class="text-2xl text-slate-500 font-bold">باقات مميزة بأسعار استثنائية لفترة محدودة جداً</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Maldives -->
+                <div class="relative aspect-[3/4] group rounded-[3.5rem] overflow-hidden shadow-2xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1514282401047-d77a7149ba6f?q=85&w=1200" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                    <div class="absolute top-10 left-10 w-24 h-24 bg-red-600 text-white rounded-full flex flex-col items-center justify-center font-black rotate-[-15deg] shadow-2xl z-20 border-4 border-white/40">
+                        <span class="text-2xl">20%</span>
+                        <span class="text-xs">خصم</span>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-10 text-white z-10">
+                        <h3 class="text-3xl font-black mb-4 group-hover:text-accent transition-colors">شهر العسل في المالديف</h3>
+                        <p class="text-white/80 font-bold mb-8 text-lg leading-relaxed">إقامة حالمة في فلل فوق الماء مع رحلات غطس وتجارب طعام رومانسية.</p>
+                        <div class="flex items-center gap-4 text-accent font-black text-xl transition-all group-hover:translate-x-[-15px]">
+                            شاهد العرض <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Turkey -->
+                <div class="relative aspect-[3/4] group rounded-[3.5rem] overflow-hidden shadow-2xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=85&w=1200" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                    <div class="absolute top-10 left-10 w-24 h-24 bg-red-600 text-white rounded-full flex flex-col items-center justify-center font-black rotate-[-15deg] shadow-2xl z-20 border-4 border-white/40">
+                        <span class="text-2xl">15%</span>
+                        <span class="text-xs">خصم</span>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-10 text-white z-10">
+                        <h3 class="text-3xl font-black mb-4 group-hover:text-accent transition-colors">اسطنبول وكبادوكيا</h3>
+                        <p class="text-white/80 font-bold mb-8 text-lg leading-relaxed">رحلة العمر لزيارة التاريخ العريق والاستمتاع بمغامرة المنطاد الساحرة.</p>
+                        <div class="flex items-center gap-4 text-accent font-black text-xl transition-all group-hover:translate-x-[-15px]">
+                            شاهد العرض <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- London -->
+                <div class="relative aspect-[3/4] group rounded-[3.5rem] overflow-hidden shadow-2xl cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=85&w=1200" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                    <div class="absolute top-10 left-10 w-24 h-24 bg-red-600 text-white rounded-full flex flex-col items-center justify-center font-black rotate-[-15deg] shadow-2xl z-20 border-4 border-white/40">
+                        <span class="text-2xl">10%</span>
+                        <span class="text-xs">خصم</span>
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-10 text-white z-10">
+                        <h3 class="text-3xl font-black mb-4 group-hover:text-accent transition-colors">صيف لندن والريف</h3>
+                        <p class="text-white/80 font-bold mb-8 text-lg leading-relaxed">جولة سياحية شاملة في قلب لندن مع زيارة لأجمل مناطق الريف البريطاني.</p>
+                        <div class="flex items-center gap-4 text-accent font-black text-xl transition-all group-hover:translate-x-[-15px]">
+                            شاهد العرض <i class="fas fa-arrow-left"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="footer-col">
-                <h3>روابط سريعة</h3>
-                <a href="#home">الرئيسية</a>
-                <a href="#features">من نحن</a>
-                <a href="#destinations">العروض السياحية</a>
-                <a href="#contact">سياسة الخصوصية</a>
-            </div>
-
-            <div class="footer-col">
-                <h3>تواصل معنا</h3>
-                <p><i class="fas fa-map-marker-alt" style="margin-left:10px; color:var(--accent-orange)"></i> الرياض، المملكة العربية السعودية</p>
-                <p><i class="fas fa-phone" style="margin-left:10px; color:var(--accent-orange)"></i> +966 50 000 0000</p>
-                <p><i class="fas fa-envelope" style="margin-left:10px; color:var(--accent-orange)"></i> info@taraftravels.com</p>
-            </div>
         </div>
-        <div class="copyright">
-            <p>جميع الحقوق محفوظة © سفريات ترف 2024</p>
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact" class="bg-slate-900 text-white pt-24 pb-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20 mb-20">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-4 mb-10">
+                        <div class="bg-accent p-3 rounded-2xl shadow-xl">
+                            <i class="fas fa-plane-departure text-white text-2xl"></i>
+                        </div>
+                        <span class="text-4xl font-black">سفريات <span class="text-accent">ترف</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xl font-bold leading-relaxed mb-10">
+                        وكالتك السياحية الأولى في المملكة. نصمم لك رحلات الأحلام بأعلى معايير الجودة والاحترافية. خبرتنا سر تميزنا.
+                    </p>
+                    <div class="flex gap-5">
+                        <a href="#" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-accent transition-all duration-300 text-xl shadow-lg"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-accent transition-all duration-300 text-xl shadow-lg"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-accent transition-all duration-300 text-xl shadow-lg"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-14 h-14 bg-slate-800 rounded-2xl flex items-center justify-center hover:bg-accent transition-all duration-300 text-xl shadow-lg"><i class="fab fa-snapchat"></i></a>
+                    </div>
+                </div>
+                <!-- Links -->
+                <div class="lg:pl-20">
+                    <h3 class="text-2xl font-black mb-10 text-accent uppercase tracking-widest">روابط سريعة</h3>
+                    <ul class="flex flex-col gap-6 text-xl font-bold">
+                        <li><a href="#home" class="text-slate-400 hover:text-white transition-all hover:translate-x-[-5px]">الرئيسية</a></li>
+                        <li><a href="#features" class="text-slate-400 hover:text-white transition-all hover:translate-x-[-5px]">من نحن</a></li>
+                        <li><a href="#destinations" class="text-slate-400 hover:text-white transition-all hover:translate-x-[-5px]">العروض السياحية</a></li>
+                        <li><a href="#contact" class="text-slate-400 hover:text-white transition-all hover:translate-x-[-5px]">سياسة الخصوصية</a></li>
+                    </ul>
+                </div>
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-2xl font-black mb-10 text-accent uppercase tracking-widest">تواصل معنا</h3>
+                    <div class="flex flex-col gap-8">
+                        <div class="flex items-start gap-5">
+                            <div class="bg-slate-800 p-3 rounded-2xl text-accent shadow-lg"><i class="fas fa-map-marker-alt text-xl"></i></div>
+                            <div>
+                                <div class="text-slate-400 text-sm font-black mb-1">الموقع الرئيسي</div>
+                                <div class="text-xl font-bold">الرياض، المملكة العربية السعودية</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div class="bg-slate-800 p-3 rounded-2xl text-accent shadow-lg"><i class="fas fa-phone-alt text-xl"></i></div>
+                            <div>
+                                <div class="text-slate-400 text-sm font-black mb-1">رقم الهاتف</div>
+                                <div class="text-xl font-bold" dir="ltr">+966 50 000 0000</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5">
+                            <div class="bg-slate-800 p-3 rounded-2xl text-accent shadow-lg"><i class="fas fa-envelope text-xl"></i></div>
+                            <div>
+                                <div class="text-slate-400 text-sm font-black mb-1">البريد الإلكتروني</div>
+                                <div class="text-xl font-bold">info@taraftravels.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-10 border-t border-slate-800 text-center text-slate-500 font-black">
+                <p>جميع الحقوق محفوظة © سفريات ترف <span id="copyright-year"></span></p>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Interactivity -->
-    <script>
-        // 1. Mobile Menu Toggle
-        function toggleMenu() {
-            const nav = document.getElementById('navLinks');
-            nav.classList.toggle('active');
-        }
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/966500000000" target="_blank" class="fixed bottom-6 right-6 z-[2000] bg-[#25D366] text-white w-16 h-16 rounded-full shadow-[0_15px_30px_rgba(37,211,102,0.4)] flex items-center justify-center hover:scale-110 active:scale-95 transition-all group border-4 border-white" aria-label="WhatsApp Contact">
+        <i class="fab fa-whatsapp text-4xl"></i>
+        <span class="absolute right-20 bg-white text-slate-800 px-5 py-3 rounded-2xl text-sm font-black shadow-2xl opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap pointer-events-none border border-slate-100 translate-x-4 group-hover:translate-x-0">
+            تحدث معنا الآن
+        </span>
+        <span class="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25 pointer-events-none"></span>
+    </a>
 
-        // 2. Destinations Filtering
-        function filterDestinations(category) {
-            const cards = document.querySelectorAll('.destination-card');
-            const buttons = document.querySelectorAll('.filter-btn');
+    <!-- AI ChatBot Floating Container -->
+    <div id="chatbot-container" class="fixed bottom-6 left-6 z-[2000] flex flex-col items-end">
+        <!-- Chat Window -->
+        <div id="chat-window" class="hidden bg-white w-[350px] sm:w-[420px] h-[550px] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden mb-5 border border-blue-50 animate-slideUp">
+            <!-- Chat Header -->
+            <div class="bg-primary p-7 text-white flex justify-between items-center shadow-lg relative z-10">
+                <div class="flex items-center gap-4">
+                    <div class="bg-white/25 p-3 rounded-2xl shadow-inner border border-white/20">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-black text-xl leading-none mb-1">مستشار ترف الذكي</div>
+                        <div class="text-xs text-blue-100 font-bold flex items-center gap-1.5 opacity-90">
+                            <div class="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.8)]"></div> 
+                            متواجد للمساعدة
+                        </div>
+                    </div>
+                </div>
+                <button id="close-chat" class="hover:bg-white/20 p-2.5 rounded-full transition-all group active:scale-90">
+                    <i class="fas fa-times text-xl group-hover:rotate-90 transition-transform"></i>
+                </button>
+            </div>
 
-            // Update active button styling
-            buttons.forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.innerText === event.target.innerText) {
-                    btn.classList.add('active');
+            <!-- Chat Messages Area -->
+            <div id="chat-messages" class="flex-grow overflow-y-auto p-7 space-y-5 bg-gradient-to-b from-blue-50/50 to-white">
+                <!-- Bot Welcome Message -->
+                <div class="flex justify-end">
+                    <div class="max-w-[90%] p-5 rounded-[2rem] text-sm font-bold leading-relaxed bg-white text-slate-700 shadow-md border border-slate-100 rounded-tl-none animate-slideUp">
+                        مرحباً بك في سفريات ترف! أنا مستشارك الذكي، يمكنني مساعدتك في تخطيط رحلتك القادمة أو الإجابة على أي تساؤل. كيف يمكنني خدمتك اليوم؟
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input Area -->
+            <div class="p-5 bg-white border-t border-slate-50">
+                <div class="flex gap-3 bg-slate-100 p-3 rounded-[1.5rem] focus-within:ring-2 ring-primary/20 transition-all border border-transparent focus-within:bg-white shadow-inner">
+                    <input id="chat-input" type="text" placeholder="اسألني عن أي وجهة سياحية..." class="flex-grow bg-transparent px-3 outline-none text-sm font-bold text-slate-800 placeholder:text-slate-400">
+                    <button id="send-btn" class="bg-primary text-white w-12 h-12 rounded-2xl flex items-center justify-center hover:bg-slate-800 transition-all shadow-md active:scale-90">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Toggle Button -->
+        <button id="chat-toggle" class="w-16 h-16 bg-primary text-white rounded-full shadow-[0_15px_35px_rgba(0,86,179,0.4)] flex items-center justify-center hover:scale-110 active:scale-90 transition-all group relative overflow-hidden border-4 border-white">
+            <i id="chat-toggle-icon" class="fas fa-comment-dots text-3xl transition-all"></i>
+            <!-- Notification Dot -->
+            <div class="absolute top-2 right-2 bg-accent w-4 h-4 rounded-full border-2 border-white animate-bounce shadow-md"></div>
+        </button>
+    </div>
+
+    <!-- Script Import Map for Gemini SDK -->
+    <script type="importmap">
+    {
+      "imports": {
+        "@google/genai": "https://esm.sh/@google/genai@1.0.1"
+      }
+    }
+    </script>
+
+    <!-- Vanilla JavaScript logic -->
+    <script type="module">
+        import { GoogleGenAI } from "@google/genai";
+
+        // --- Configuration & Constants ---
+        // Assume API_KEY is injected by environment
+        const API_KEY = ""; 
+        const chatHistory = [];
+        const SYSTEM_PROMPT = `
+            أنت مستشار سفر ذكي وودود لوكالة "سفريات ترف" (Taraf Travels). 
+            مهمتك هي مساعدة العملاء في تخطيط رحلاتهم، اقتراح وجهات سياحية، والإجابة على استفساراتهم حول الباقات.
+            يجب أن يكون أسلوبك احترافياً، ملهماً، وباللغة العربية الفصحى المبسطة أو اللهجة السعودية المهذبة.
+            وجهاتنا المميزة حالياً: سويسرا، تايلاند، إيطاليا، دبي، بالي، وشرم الشيخ.
+            شجع المستخدم دائماً على التواصل عبر واتساب (+966 50 000 0000) للحجز الفعلي.
+        `;
+
+        // --- DOM Elements ---
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const chatToggle = document.getElementById('chat-toggle');
+        const chatToggleIcon = document.getElementById('chat-toggle-icon');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const destCards = document.querySelectorAll('.dest-card');
+        const header = document.getElementById('main-header');
+
+        // Initialize state
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
+
+        // --- Header Scroll Logic ---
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('py-1', 'shadow-xl');
+                header.classList.remove('h-[85px]');
+            } else {
+                header.classList.remove('py-1', 'shadow-xl');
+                header.classList.add('h-[85px]');
+            }
+            
+            // Scroll Spy
+            let currentSection = "";
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    currentSection = section.getAttribute('id');
                 }
             });
 
-            // Show/Hide cards with animation
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'scale(0.95)';
-                
-                setTimeout(() => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'scale(1)';
-                        }, 50);
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }, 300);
-            });
-        }
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
             });
         });
+
+        // --- Mobile Menu Toggle ---
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
+            });
+        });
+
+        // --- Destination Filtering Logic ---
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.getAttribute('data-filter');
+                
+                // Update buttons UI
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-white', 'scale-105', 'shadow-xl');
+                    b.classList.add('bg-white', 'text-primary');
+                });
+                btn.classList.add('bg-primary', 'text-white', 'scale-105', 'shadow-xl');
+                btn.classList.remove('bg-white', 'text-primary');
+
+                // Filter cards with animation
+                destCards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    if (filter === 'all' || category === filter) {
+                        card.style.display = 'flex';
+                        card.classList.add('animate-slideUp');
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('animate-slideUp');
+                    }
+                });
+            });
+        });
+
+        // --- ChatBot UI Toggle ---
+        chatToggle.addEventListener('click', () => {
+            chatWindow.classList.toggle('hidden');
+            chatToggleIcon.classList.toggle('fa-comment-dots');
+            chatToggleIcon.classList.toggle('fa-times');
+            if (!chatWindow.classList.contains('hidden')) {
+                chatInput.focus();
+            }
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
+            chatToggleIcon.classList.add('fa-comment-dots');
+            chatToggleIcon.classList.remove('fa-times');
+        });
+
+        // --- Gemini AI Integration ---
+        async function handleSendMessage() {
+            const userText = chatInput.value.trim();
+            if (!userText) return;
+
+            // Clear input
+            chatInput.value = '';
+
+            // Add User Message to UI
+            appendMessage('user', userText);
+
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Add Loading State
+            const loaderId = appendLoader();
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // Initialize AI client (Assuming process.env.API_KEY is available)
+                const genAI = new GoogleGenAI({ apiKey: window.process?.env?.API_KEY || API_KEY });
+                
+                // Prepare conversation history for the model
+                const contents = [
+                    ...chatHistory.map(h => ({
+                        role: h.role,
+                        parts: [{ text: h.text }]
+                    })),
+                    { role: 'user', parts: [{ text: userText }] }
+                ];
+
+                const result = await genAI.models.generateContent({
+                    model: 'gemini-3-flash-preview',
+                    contents: contents,
+                    config: {
+                        systemInstruction: SYSTEM_PROMPT,
+                        temperature: 0.7,
+                    }
+                });
+
+                const botResponse = result.text;
+                
+                // Remove loader
+                const loader = document.getElementById(loaderId);
+                if (loader) loader.remove();
+
+                // Add Bot Message to UI
+                appendMessage('model', botResponse);
+
+                // Update internal history
+                chatHistory.push({ role: 'user', text: userText });
+                chatHistory.push({ role: 'model', text: botResponse });
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                const loader = document.getElementById(loaderId);
+                if (loader) loader.remove();
+                appendMessage('model', "عذراً، حدث خطأ ما أثناء الاتصال بالمستشار. يرجى المحاولة لاحقاً.");
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function appendMessage(role, text) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex ${role === 'user' ? 'justify-start' : 'justify-end'} animate-slideUp`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `max-w-[90%] p-5 rounded-[2rem] text-sm font-bold leading-relaxed shadow-md border ${
+                role === 'user' 
+                ? 'bg-primary text-white border-primary rounded-tr-none' 
+                : 'bg-white text-slate-700 border-slate-100 rounded-tl-none'
+            }`;
+            bubble.textContent = text;
+            
+            wrapper.appendChild(bubble);
+            chatMessages.appendChild(wrapper);
+        }
+
+        function appendLoader() {
+            const id = 'loader-' + Date.now();
+            const wrapper = document.createElement('div');
+            wrapper.id = id;
+            wrapper.className = 'flex justify-end animate-pulse';
+            
+            wrapper.innerHTML = `
+                <div class="bg-white p-4 rounded-[1.5rem] rounded-tl-none border border-slate-100 flex items-center gap-2 shadow-sm">
+                    <i class="fas fa-circle-notch fa-spin text-primary"></i>
+                    <span class="text-slate-400 text-xs font-black">جاري التفكير...</span>
+                </div>
+            `;
+            
+            chatMessages.appendChild(wrapper);
+            return id;
+        }
+
+        // Event Listeners for Send
+        sendBtn.addEventListener('click', handleSendMessage);
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') handleSendMessage();
+        });
+
+        // Initialize images error handling
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', () => {
+                img.src = 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=800&auto=format&fit=crop';
+            });
+        });
+
     </script>
 </body>
 </html>
